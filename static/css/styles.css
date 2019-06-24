@@ -1,0 +1,34 @@
+
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
+@import url(https://fonts.googleapis.com/css?family=Comfortaa);
+body {
+  font-family: 'Comfortaa', cursive;
+  background: #353535;
+
+}
+
+.jumbotron h3 {
+  color: #353535;
+}
+
+footer {
+  margin-bottom: 0 !important;
+  margin-top: 80px;
+}
+footer p {
+  margin: 0;
+  padding: 0;
+}
+span.icon {
+  margin: 0 5px;
+  color: #D64541;
+}
+h2 {
+  color: #BDC3C7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.mrng-60-top {
+  margin-top: 60px;
+}
+

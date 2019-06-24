@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>EditorX - Home</title>
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+    <link rel="stylesheet" href="/static/css/styles.css"/>
+    <script src="static/js/summernote-ext-print.js"></script>
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row no-gutter">
+        <div class="jumbotron text-center d-none d-md-flex col-md-4 col-lg-6 bg-image" style="height: 100%;">
+              <h3 style="color:#353535;">EditorX</h3>
+              <p style="color:#888;">Prototype built with Python and OpenCV</p> 
+              <div id="summernote"></div>  
+              <script>
+                $(document).ready(function() {
+                    $('#summernote').summernote({
+                        height: 500,
+                        minHeight: 300,
+                        toolbar: [
+                            // [groupName, [list of button]]
+                            ['style', ['bold', 'italic', 'underline', 'clear']],
+                            ['font', ['strikethrough', 'superscript', 'subscript']],
+                            ['fontsize', ['fontsize']],
+                            ['color', ['color']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['height', ['height']],
+                            ['table', ['table']],
+                            ['insert', ['link', 'picture']],
+                            ['view', ['fullscreen', 'codeview', 'help']],
+                            ['misc', ['print']]
+                        ],
+                    });
+                    $('#summernote').summernote('insertText', 'Hello!');
+                });
+              </script>
+        </div>
+
+        <div class="col-md-8 col-lg-6" style="height: 100%;">
+          <div class="login d-flex align-items-center py-5">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-9 col-lg-8 mx-auto">
+                  <form>
+                    <a href="/display-text" class="btn btn-sm animated-button victoria-two">
+                      Upload Your Image
+                    </a>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase font-weight-bold mb-2" type="submit">Upload Your Image</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
