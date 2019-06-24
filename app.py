@@ -5,6 +5,8 @@ import os
 app = Flask(__name__)
 app.config['UPLOADED_PATH'] = os.path.join(app.root_path, 'images/uploads')
 
+### TODO: mkdir -> images/uploads and images/processed
+### TODO: process images -> crop and correct for skew, brightness
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -12,20 +14,6 @@ def upload_file():
         for file in request.files.getlist('file'):
             file.save(os.path.join(app.config['UPLOADED_PATH'], file.filename))
     return render_template('index.html')
-
-
-@app.route("/identify")
-def identify():
-    faceRecognizer = FaceRecognizer(
-        source=0,
-        haar_file=HAAR_FILE,
-        data_path=DATA_PATH,
-        width=WIDTH,
-        height=HEIGHT
-    )
-    user_name = faceRecognizer.identify_user()
-    print(user_name)
-    return render_template("confirm.html", name=user_name)
 
 
 if __name__ == "__main__":
