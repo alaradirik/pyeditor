@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>EditorX - Home</title>
+    <title>EditorX - Upload Complete</title>
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -47,11 +47,12 @@
         </div>
 
         <div class="text-center col-md-5 col-lg-5" style="height: 600px;">
-            <h3 style="color:#353535; padding-top: 100px;">Upload an image of your document to get started.</h3> 
-            <form action="{{ url_for('upload_file') }}" class="dropzone" style="color:#353535;" method="POST" enctype="multipart/form-data">
-            </form>
-            <a href="{{ url_for('serve_processed_image') }}">Upload Complete</a>
-            <script src="static/js/dropzone.js"></script>
+            <h3 style= "padding-top: 100px;">Corrected and cropped image.</h3> 
+            {% if filepath %}
+              <img src="{{filepath}}" alt="cropped image"> 
+            {% else %}
+              <h1>no image for whatever reason</h1>
+            {% endif %}
 
         </div>
 
