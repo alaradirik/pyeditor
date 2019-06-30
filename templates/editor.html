@@ -22,7 +22,7 @@
         <div class="jumbotron text-center col-md-7 col-lg-7" style="height: 100%;">
               <h3 style="color:#353535;">EditorX</h3>
               <p style="color:#888;">Prototype built with Python and OpenCV</p> 
-              <div id="summernote">Hello Summernote</div>  
+              <div id="summernote"></div>  
               <script>
                 $(document).ready(function() {
                     $('#summernote').summernote({
@@ -42,6 +42,7 @@
                             ['misc', ['print']]
                         ],
                     });
+                    $('#summernote').summernote('insertText', 'Hello!');
                 });
               </script>
         </div>
