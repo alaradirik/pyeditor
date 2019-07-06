@@ -28,6 +28,7 @@
                     $('#summernote').summernote({
                         height: 600,
                         minHeight: 300,
+                        direction: 'rtl',
                         toolbar: [
                             // [groupName, [list of button]]
                             ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -42,6 +43,7 @@
                             ['misc', ['print']]
                         ],
                     });
+                    $('#summernote').summernote('justifyLeft');
                     $('#summernote').summernote('insertText', "{{text}}");
                 });
               </script>

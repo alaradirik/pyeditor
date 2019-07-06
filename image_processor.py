@@ -131,11 +131,15 @@ def convert_image_to_text(input_path, output_path):
 
 def read_text(text_file_dir):
     text_file = [f for f in os.listdir(text_file_dir) if f.endswith('.txt')][0]
+
     f = open( os.path.join(text_file_dir, text_file), 'r')
     x = f.readlines()
     f.close()
-    print(x)
-    return x
+    
+    text = ' '.join(x)
+    text = ' '.join(text.split())
+    text = [text.replace("\n","")]
+    return text
 
 
 
