@@ -7,7 +7,7 @@ EditorX is an image-to-text web app that allows users to edit extracted text and
 ## Project Structure
 
     .
-    ├── app.py                  		# EditorX Flask app
+    ├── app.py                   # EditorX Flask app
     ├── image_processor.py              # Extracts text from images
     ├── static                          # Includes CSS, JS and image folders
         └── css
