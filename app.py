@@ -3,13 +3,13 @@ import re
 
 from flask import Flask, render_template, request
 import nltk
-from nltk.tokenize import sent_tokenize
-nltk.download('punkt')
+#from nltk.tokenize import sent_tokenize
+#nltk.download('punkt')
 
 from image_processor import convert_image_to_text
 
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__)
 UPLOAD_FOLDER = os.path.join(app.root_path, 'static/images/uploads')
 PROCESSED_DOC_FOLDER = os.path.join(app.root_path, 'static/images/processed')
 
@@ -40,8 +40,8 @@ def serve_processed_image():
               if any(fn.endswith(ext) for ext in valid_extensions)][0]
     filepath = os.path.join('/static/images/uploads', filename)
     
-    convert_image_to_text(filepath, PROCESSED_DOC_FOLDER)
-    #sentences = split_paragraph_into_sentences(text)
+    convert_image_to_text(UPLOAD_FOLDER, PROCESSED_DOC_FOLDER)
+
     return render_template('editor.html', filepath=filepath)
 
 if __name__ == "__main__":
