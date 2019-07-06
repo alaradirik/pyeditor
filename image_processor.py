@@ -35,7 +35,9 @@ def get_command():
     return DEFAULT_CHECK_COMMAND
 
 def run_tesseract(filename, output_path, image_file_name):
-    # Run tesseract
+    """
+        Extract text from the input image and save it to a text file.
+    """
     filename_without_extension = os.path.splitext(filename)[0]
     text_file_path = os.path.join(output_path, filename_without_extension)
 
@@ -126,4 +128,14 @@ def convert_image_to_text(input_path, output_path):
     else:
         filename = os.path.basename(input_path)
         run_tesseract(filename, output_path, filename)
+
+def read_text(text_file_dir):
+    text_file = [f for f in os.listdir(text_file_dir) if f.endswith('.txt')][0]
+    f = open( os.path.join(text_file_dir, text_file), 'r')
+    x = f.readlines()
+    f.close()
+    print(x)
+    return x
+
+
 

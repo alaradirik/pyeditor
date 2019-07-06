@@ -2,11 +2,7 @@ import os
 import re
 
 from flask import Flask, render_template, request
-import nltk
-#from nltk.tokenize import sent_tokenize
-#nltk.download('punkt')
-
-from image_processor import convert_image_to_text
+from image_processor import convert_image_to_text, read_text
 
 
 app = Flask(__name__)
@@ -14,7 +10,7 @@ UPLOAD_FOLDER = os.path.join(app.root_path, 'static/images/uploads')
 PROCESSED_DOC_FOLDER = os.path.join(app.root_path, 'static/images/processed')
 
 ### TODO: process uploaded images -> crop and correct for skew, brightness
-### TODO: tesseract to text file -> read in line by line
+### TODO: clean up extracted text and break into paragraphs
 def split_paragraph_into_sentences(paragraph):
     sentence_list = sent_tokenize(paragraph)
     return sentence_list
@@ -41,8 +37,9 @@ def serve_processed_image():
     filepath = os.path.join('/static/images/uploads', filename)
     
     convert_image_to_text(UPLOAD_FOLDER, PROCESSED_DOC_FOLDER)
+    text = read_text(PROCESSED_DOC_FOLDER)
 
-    return render_template('editor.html', filepath=filepath)
+    return render_template('editor.html', filepath=filepath, text=text)
 
 if __name__ == "__main__":
     app.run(debug = True)
