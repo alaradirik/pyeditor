@@ -2,7 +2,7 @@ import os
 import re
 
 from flask import Flask, render_template, request
-from image_processor import convert_image_to_text, read_text
+from extract_text import convert_image_to_text, read_text
 
 
 app = Flask(__name__)
