@@ -7,7 +7,7 @@ EditorX is an image-to-text web app that allows users to edit extracted text and
 ## Project Structure
 
     .
-    ├── app.py                   # EditorX Flask app
+    ├── app.py
     ├── image_processor.py              # Extracts text from images
     ├── static                          # Includes CSS, JS and image folders
         └── css
@@ -30,14 +30,19 @@ EditorX is an image-to-text web app that allows users to edit extracted text and
 
 `pip install -r requirements.txt`
 
-#### Install pre-commit hook so black will autorun on commits
+#### Install Tesseract OCR:
 
-`pre-commit install`
+Linux:
+`[sudo] apt-get install tesseract-ocr`
 
-#### Install Tesseract OCR
+macOS:
+`brew install tesseract-ocr`
 
-
+Windows:
+Find the instructions [here.](https://github.com/tesseract-ocr/tesseract/wiki)
 
 
 
 ## Running EditorX:
+
+`python app.py`
