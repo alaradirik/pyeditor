@@ -52,47 +52,40 @@ def four_point_transform(image, points):
  
 	return warped
 
+def transform_image(image_path):
+	# Load and resize the image
+	image = cv2.imread(image_path)
+	ratio = image.shape[0] / 500.0
+	orig = image.copy()
+	image = imutils.resize(image, height = 500)
+	 
+	# Convert to grayscale, blur and find the edges
+	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+	gray = cv2.GaussianBlur(gray, (5, 5), 0)
+	edged = cv2.Canny(gray, 75, 200)
 
-# Construct an argument parser
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required = True,
-	help = "Path to the image to be scanned")
-args = vars(ap.parse_args())
+	# Find the contours of the document/target screne
+	cnts = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+	cnts = imutils.grab_contours(cnts)
+	cnts = sorted(cnts, key = cv2.contourArea, reverse = True)[:5]
+	 
+	# Approximate the contours and reiterate until the screen is found
+	for c in cnts:
+		peri = cv2.arcLength(c, True)
+		approx = cv2.approxPolyDP(c, 0.02 * peri, True)
+	 
+		if len(approx) == 4:
+			screenCnt = approx
+			break
 
-# Load and resize the image
-image = cv2.imread(args["image"])
-ratio = image.shape[0] / 500.0
-orig = image.copy()
-image = imutils.resize(image, height = 500)
- 
-# Convert to grayscale, blur and find the edges
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-gray = cv2.GaussianBlur(gray, (5, 5), 0)
-edged = cv2.Canny(gray, 75, 200)
-
-# Find the contours of the document/target screne
-cnts = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-cnts = imutils.grab_contours(cnts)
-cnts = sorted(cnts, key = cv2.contourArea, reverse = True)[:5]
- 
-# Approximate the contours and reiterate until the screen is found
-for c in cnts:
-	peri = cv2.arcLength(c, True)
-	approx = cv2.approxPolyDP(c, 0.02 * peri, True)
- 
-	if len(approx) == 4:
-		screenCnt = approx
-		break
-
-# Apply the four point transform using the screen contours
-warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
- 
-# Convert the transformed image to grayscale and threshold it
-warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-T = threshold_local(warped, 11, offset = 10, method = "gaussian")
-warped = (warped > T).astype("uint8") * 255
- 
-cv2.imshow("Original", imutils.resize(orig, height = 650))
-cv2.imshow("Scanned", imutils.resize(warped, height = 650))
-cv2.waitKey(5)
-cv2.destroyAllWindows()
+	# Apply the four point transform using the screen contours
+	warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
+	 
+	# Convert the transformed image to grayscale and threshold it
+	warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+	T = threshold_local(warped, 11, offset = 10, method = "gaussian")
+	warped = (warped > T).astype("uint8") * 255
+	
+	# Save transformed image
+	cv2.imwrite(image_path, warped)
+	return
