@@ -1,5 +1,6 @@
 import os
 import re
+import html
 
 from flask import Flask, render_template, request
 from extract_text import convert_image_to_text, read_text
@@ -12,9 +13,6 @@ PROCESSED_DOC_FOLDER = os.path.join(app.root_path, "static/images/processed")
 
 ### TODO: process uploaded images -> crop and correct for skew, brightness
 ### TODO: clean up extracted text and break into paragraphs
-def split_paragraph_into_sentences(paragraph):
-    sentence_list = sent_tokenize(paragraph)
-    return sentence_list
 
 @app.route("/", methods=["GET", "POST"])
 def upload_file():
@@ -39,7 +37,8 @@ def serve_processed_image():
     filepath = os.path.join("/static/images/uploads", filename)
     
     convert_image_to_text(UPLOAD_FOLDER, PROCESSED_DOC_FOLDER)
-    text = read_text(PROCESSED_DOC_FOLDER)
+    text = read_text(PROCESSED_DOC_FOLDER)[0]
+
 
     return render_template("editor.html", filepath=filepath, text=text)
 

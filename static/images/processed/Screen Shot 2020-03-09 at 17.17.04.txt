@@ -1,0 +1,15 @@
+Command Line Arguments:
+dir = edge_cases
+arch = vgg
+dogfile = dognames.txt
+
+Pet Image Label Dictionary has 3 key-value pairs.
+
+Below are 3 of them:
+
+1 key: Poodle.jpg label:
+2 key: Poodle_72@.jpg label:
+3 key: 720_Poodle.jpg label:
+
+poodle
+
