@@ -3,6 +3,7 @@
 ## Background
 
 EditorX is an image-to-text web app that allows users to edit extracted text and save it as pdf.
+
 ![working app](https://github.com/alaradirik/editorX/blob/master/screenshots/app.gif "Flask app")
 
 ## Project Structure
