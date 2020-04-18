@@ -45,6 +45,6 @@ Find the instructions [here.](https://github.com/tesseract-ocr/tesseract/wiki)
 
 
 
-## Running EditorX:
+## Running pyeditor:
 
 `python app.py`
