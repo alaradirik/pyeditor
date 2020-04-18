@@ -1,4 +1,4 @@
-# py-editor
+# pyeditor
 
 ## Background
 
