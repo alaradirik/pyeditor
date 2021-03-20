@@ -1,7 +1,7 @@
 docutils==0.14
 Flask==1.0.2
 Flask-Cors==3.0.7
-Jinja2==2.10.1
+Jinja2==2.11.3
 jmespath==0.9.3
 MarkupSafe==1.1.1
 numpy==1.16.3
